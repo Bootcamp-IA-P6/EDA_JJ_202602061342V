@@ -1,0 +1,29 @@
+https://www.google.com/search?q=como+dividir+un+video+de+3+GB+partes+de+100+MB+con+vlc+en+linea+de+comandos&newwindow=1&sca_esv=01e84e26bfa42c3c&rlz=1C1ONGR_esES1190ES1190&sxsrf=ANbL-n7D-gH044EGEiL9VUEEFZOx1NEK2A%3A1770479168618&ei=QF6HafCnJYWpkdUP_uaH2Qo&biw=1280&bih=499&ved=2ahUKEwjo-r2L3ceSAxXzKvsDHUZaN7YQ0NsOegQIAxAB&uact=5&sclient=gws-wiz-serp&udm=50&fbs=ADc_l-bpk8W4E-qsVlOvbGJcDwpnWL6Swv3cGYGr8GhrqffhqWQeKrzHXR8CrIbqBEGtaz2oeuogojn39yKgn18EXMkpIfKk4ahPgQj76TT6z2x7oS_spQa3RClEj-w68ZaOjsx0LdgBQE-RiADEFOMu1EwUBkFJLWol7ii1AUaal9Zf9pqEhT5kwCiUm3HXMJ5x5ZbZ8wJt&aep=10&ntc=1&mtid=316Had3xKd7X7M8P1aSn8Qo&mstk=AUtExfDKjjjLEkGPbPttkswTEFsc5mHVgjs9dhzIEPSeKiqxMw-1WQkMVX3ldspACfT53RJ77horBraQ0HJd8yAt6RwYSU8yHNklrFOJ8VSjYMuAffO_CUblaMrUtxX62tduOw0Q9aHIBsOwD9J0srzs5pn4D6UKYVPG3yQL4Xgj4t7-k61mjoaEUeLsCUISW2WccJhge4kH_6N3qL4vzpHqISkYw1FjjYVXvGbol-jQvXdlIPBb7JxsYN3jlm-B_HPueMK-tBNIb15OK0YV8lAawG6NZwa9VFCe3XjEngZS7jczFhXrSlxiErGifQSJZjMunSSX7FnFTOSziQ&csuir=1
+
+Gracias a Google Search en modo IA.
+
+powershell
+winget install "FFmpeg (Essentials Build)"
+
+https://github.com/GyanD/codexffmpeg/releases/download/8.0.1/ffmpeg-8.0.1-essentials_build.zip
+
+Eliminación del audio:
+ffmpeg -i "2026-02-04_21-46-08.mp4" -c:v copy -an "2026-02-04_21-46-08.A0.mp4"
+
+DEterminación de la duración del vídeo.
+ffprobe 2026-02-04_21-46-08.A0.mp4
+
+Estimación de tamaño:
+¡Ojo con este detalle! Tu video dura 21 horas y 56 minutos (21:56:32), pero solo pesa 735 MB. Esto significa que tiene un bitrate bajísimo (74 kb/s).
+Si lo divides por tiempo usando fragmentos de 2 minutos como hablábamos antes, ¡te saldrán cientos de archivos de menos de 1 MB!
+Para que cada trozo pese aproximadamente 100 MB, debemos dividir el tiempo total (79,000 segundos) entre 7 partes. Eso nos da unos 11,300 segundos por parte.
+
+
+División en fragmentos de unos 100MB.
+ffmpeg -i "2026-02-04_21-46-08.A0.mp4" -c copy -f segment -segment_time 11300 -reset_timestamps 1 "2026-02-04_21-46-08.A1_%03d.mp4"
+
+20260207173201*
+
+Un último consejo: Si alguna vez necesitas volver a unir estos fragmentos en un solo video sin perder calidad, puedes usar el Demuxer de concatenación de FFmpeg creando un archivo de texto con la lista de archivos.
+
+20260207182829*
