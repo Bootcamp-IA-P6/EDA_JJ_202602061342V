@@ -89,16 +89,18 @@ git add .gitattributes
 
 # 5. Añadir el resto de archivos (tus videos y el README)
 git add .
+git status
 
 # 6. Hacer el primer commit
-git commit -m "Subida de evidencia de error VS Code y README"
+# git commit -m "Subida de evidencia de error VS Code y README"
+git commit -m "Intento de Trazablidad Error VS Code y jupyterNotebook.ipynb"
 
 # 7. Renombrar la rama a main (estándar actual)
 git branch -M main
 
 # 8. Conectar con tu repositorio remoto
 # SUSTITUYE "TU_USUARIO" por tu nombre real de GitHub
-git remote add origin https://github.com/TU_USUARIO/EDA_Reporte_Error.git
+git remote add origin https://github.com/Bootcamp-IA-P6/EDA_JJ_202602061342V.git
 
 # 9. Subir los archivos (esto tardará un poco por el tamaño de los videos)
 git push -u origin main
